@@ -1,0 +1,8 @@
+aws-region  = "eu-west-2"
+aws-profile       = "ds-web-products-staging"
+instance-tag-name = "App-Engagement-Ec2"
+user-data-script  = "../../apps/deploy-engagement-app.sh"
+instance-key-name = "engage-key"
+iam-role-name     = "engage-ECR-read"
+instance-ami      = "ami-01419b804382064e4"
+environment       = "staging"
