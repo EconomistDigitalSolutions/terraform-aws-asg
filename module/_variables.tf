@@ -116,7 +116,6 @@ variable "placement-group-name" {
   default     = "placement-group-created-w-terraform"
 }
 
-
 variable "target-group-name" {
   description = "The name of the placement group"
   type        = "string"
@@ -128,7 +127,6 @@ variable "launch-config-name" {
   type        = "string"
   default     = "launch-configuration-created-with-terraform"
 }
-
 
 variable "asg-name" {
   description = "The name of the Auto Scaling Group"
@@ -152,4 +150,10 @@ variable "asg-def-size" {
   description = "The default/recommended size of the Auto Scaling Group"
   type        = "string"
   default     = "3"
+}
+
+variable "domain-name" {
+  description = "The apps public domain name"
+  type        = "string"
+  default     = ""
 }

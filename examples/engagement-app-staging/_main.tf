@@ -10,4 +10,5 @@ module "terraform-aws-ec2" {
   instance-ami      = "${var.instance-ami}"
   alb-name          = "${var.alb-name}"
   instance-type     = "${var.instance-type}"
+  domain-name       = "${var.domain-name}"
 }

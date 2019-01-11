@@ -47,3 +47,8 @@ variable "alb-name" {
   default     = "app-load-balancer-with-terraform"
 }
 
+variable "domain-name" {
+  description = "The default/recommended size of the Auto Scaling Group"
+  type        = "string"
+  default     = ""
+}
