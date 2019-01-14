@@ -8,6 +8,13 @@ variable "aws-profile" {
   type        = "string"
 }
 
+variable "instance-type" {
+  description = "The instance type to be used"
+  type        = "string"
+  default     = "t2.micro"
+}
+
+
 variable "instance-key-name" {
   description = "The name of the SSH key to associate to the instance. Note that the key must exist already."
   type        = "string"
@@ -31,4 +38,17 @@ variable "instance-tag-name" {
 variable "iam-role-name" {
   description = "The IAM role to assign to the instance"
   type        = "string"
+}
+
+
+variable "alb-name" {
+  description = "The application Load Balancer name"
+  type        = "string"
+  default     = "app-load-balancer-with-terraform"
+}
+
+variable "domain-name" {
+  description = "The default/recommended size of the Auto Scaling Group"
+  type        = "string"
+  default     = ""
 }
