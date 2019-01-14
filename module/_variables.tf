@@ -101,11 +101,59 @@ variable "environment" {
 variable "alb-name" {
   description = "The application Load Balancer name"
   type        = "string"
-  default     = "app-load-balancer-with-terraform"
+  default     = "app-load-balancer-w-terraform"
 }
 
 variable "sg-alb-tag-name" {
   description = "The name of the SG associated with the ALB"
   type        = "string"
   default     = "SG-to-theapp-load-balancer-with-terraform"
+}
+
+variable "placement-group-name" {
+  description = "The name of the placement group"
+  type        = "string"
+  default     = "placement-group-created-w-terraform"
+}
+
+variable "target-group-name" {
+  description = "The name of the placement group"
+  type        = "string"
+  default     = "target-group-created-w-terraform"
+}
+
+variable "launch-config-name" {
+  description = "The name of the launch configuration"
+  type        = "string"
+  default     = "launch-configuration-created-with-terraform"
+}
+
+variable "asg-name" {
+  description = "The name of the Auto Scaling Group"
+  type        = "string"
+  default     = "ASG-created-with-terraform"
+}
+
+variable "asg-min-size" {
+  description = "The minimum size of the Auto Scaling Group"
+  type        = "string"
+  default     = "2"
+}
+
+variable "asg-max-size" {
+  description = "The maximum size of the Auto Scaling Group"
+  type        = "string"
+  default     = "4"
+}
+
+variable "asg-def-size" {
+  description = "The default/recommended size of the Auto Scaling Group"
+  type        = "string"
+  default     = "3"
+}
+
+variable "domain-name" {
+  description = "The apps public domain name"
+  type        = "string"
+  default     = ""
 }
