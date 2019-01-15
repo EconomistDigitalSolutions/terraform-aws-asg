@@ -22,7 +22,10 @@
 <hr/>
 
 ## Notes
- 
-* no *user-data* script was passed
-* because of this, the machines do not run any application.
 
+* this is an "useless" example:
+  * it deploy AWS infrastructure 
+  * but no application that runs on it
+* this application is **not** covered by the AWS free tier.
+  * destroy the resources as soon as you do not need them anymore  
+  
