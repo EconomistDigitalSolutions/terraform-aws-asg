@@ -5,7 +5,6 @@ This module provisions the resources necessary to run a (docker) application in 
 ## Table of contents
 
 - [Terraform/AWS Auto Scaling Module](#terraformaws-auto-scaling-module)
-  - [Table of contents](#table-of-contents)
   - [WWH - What, Why, How](#wwh---what-why-how)
   - [Usage](#usage)
   - [Implementation details](#implementation-details)
