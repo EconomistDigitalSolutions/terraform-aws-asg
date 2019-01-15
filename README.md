@@ -59,7 +59,7 @@ To use this module, it is advised to carefully follow these instructions:
     terraform init; terraform apply --auto-approve
     ```
  
-4) Case you change any part of the infrastructure, repeat step 3) again.
+4) Case you change any part of the infrastructure, repeat step 3).
 
 5) To tear down the infrastructure, run
     ```
@@ -186,6 +186,9 @@ None
 ## Bugs/Known Issues
 
 * can not change instance launch configuration (leads to terraform error).
+
+* changing the AWS region requires changing the machine AMI.
+
 
 
 
