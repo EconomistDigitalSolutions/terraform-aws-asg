@@ -30,25 +30,19 @@ variable "instance-ami" {
   type        = "string"
 }
 
-variable "instance-tag-name" {
-  description = "instance-tag-name"
+
+variable "asg-min-size" {
+  description = "The minimum size of the Auto Scaling Group"
   type        = "string"
 }
 
-variable "iam-role-name" {
-  description = "The IAM role to assign to the instance"
+variable "asg-max-size" {
+  description = "The maximum size of the Auto Scaling Group"
   type        = "string"
 }
 
-
-variable "alb-name" {
-  description = "The application Load Balancer name"
-  type        = "string"
-  default     = "app-load-balancer-with-terraform"
-}
-
-variable "domain-name" {
+variable "asg-def-size" {
   description = "The default/recommended size of the Auto Scaling Group"
   type        = "string"
-  default     = ""
 }
+
