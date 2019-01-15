@@ -188,6 +188,8 @@ None
 
 * changing the AWS region requires changing the machine AMI.
 
+* only one of the subnets is publicly accessible
+  * check route_table_association method and adapt it for the two subnets
 
 
 
