@@ -1,6 +1,6 @@
 # Terraform/AWS Auto Scaling Module
 
-This module provisions the resources necessary to run a (docker) application in an Auto Scaling Group (ASG) of EC2 instances. This module should be production ready.
+This module provisions the resources necessary to run a (docker) application in an Auto Scaling Group (ASG) of EC2 instances. This module should be production ready. This module is available at [https://registry.terraform.io/modules/EconomistDigitalSolutions/asg/aws/](https://registry.terraform.io/modules/EconomistDigitalSolutions/asg/aws/)
 
 ## Table of contents
 
