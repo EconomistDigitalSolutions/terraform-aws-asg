@@ -157,9 +157,3 @@ variable "domain-name" {
   type        = "string"
   default     = ""
 }
-
-variable "sub-domain-name" {
-  description = "The apps public sub domain name"
-  type        = "string"
-  default     = ""
-}
