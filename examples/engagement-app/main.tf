@@ -15,5 +15,5 @@ module "asg" {
   launch-config-name           = "rafa-ian-lc"
   instance-associate-public-ip = "true"
   iam-role-name                = "engage-ECR-read"
-  ssh-allowed-ips              = ["62.255.97.196/32", "62.255.97.197/32"]
+  ssh-allowed-ips              = ["62.255.97.196/32", "62.6.58.84/32"]
 }
