@@ -163,9 +163,3 @@ variable "sub-domain-name" {
   type        = "string"
   default     = ""
 }
-
-variable "ssh-allowed-ips" {
-  description = "The list of IPs that are allowed to SSH into the instances"
-  type        = "list"
-  default     = []
-}
