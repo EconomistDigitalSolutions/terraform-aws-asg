@@ -8,7 +8,7 @@ resource "aws_launch_configuration" "launch_config" {
   iam_instance_profile        = "${var.iam-role-name != "" ? var.iam-role-name : ""}"
   key_name                    = "${var.instance-key-name != "" ? var.instance-key-name : ""}"
   user_data                   = "${var.user-data-script != "" ? file("${var.user-data-script}") : ""}"
-  associate_public_ip_address = "${var.instance-associate-public-ip}"                                  
+  associate_public_ip_address = "${var.instance-associate-public-ip == "true" ? true : false}"
   security_groups             = ["${aws_security_group.sg.id}"]
 }
 
@@ -35,4 +35,3 @@ resource "aws_autoscaling_attachment" "asg_attachment_bar" {
   autoscaling_group_name = "${aws_autoscaling_group.asg.id}"
   alb_target_group_arn   = "${aws_lb_target_group.lb_target.arn}"
 }
-

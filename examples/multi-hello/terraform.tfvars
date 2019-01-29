@@ -1,0 +1,6 @@
+aws-profile           = "ds-web-products-staging"
+aws-region            = "eu-west-3"
+alb-name              = "private-test"
+placement-group-name  = "private-test"
+target-group-name     = "private-test"
+asg-name              = "private-test"
