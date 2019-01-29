@@ -16,12 +16,12 @@ resource "aws_lb_target_group" "lb_target" {
   vpc_id   = "${aws_vpc.vpc.id}"
 
   health_check = {
-    interval  = 6
-    timeout   = 5
-    path      = "${var.health-check-path}"
-    port      = "${var.health-check-port}"
-    matcher   = "200-299" 
-  }  
+    interval = 6
+    timeout  = 5
+    path     = "${var.health-check-path}"
+    port     = "${var.health-check-port}"
+    matcher  = "200-299"
+  }
 }
 
 resource "aws_lb_listener" "lb_listener" {
