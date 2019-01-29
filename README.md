@@ -5,6 +5,7 @@ This module provisions the resources necessary to run a (docker) application in 
 ## Table of contents
 
 - [Terraform/AWS Auto Scaling Module](#terraformaws-auto-scaling-module)
+  - [Table of contents](#table-of-contents)
   - [WWH - What, Why, How](#wwh---what-why-how)
   - [Usage](#usage)
   - [Implementation details](#implementation-details)
@@ -187,9 +188,5 @@ None
 * can not change instance launch configuration (leads to terraform error).
 
 * changing the AWS region requires changing the machine AMI.
-
-* only one of the subnets is publicly accessible
-  * check route_table_association method and adapt it for the two subnets
-
 
 
