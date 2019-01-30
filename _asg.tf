@@ -2,7 +2,7 @@
 # Configures the machines that are deployed
 #
 resource "aws_launch_configuration" "launch_config" {
-  name                        = "${var.launch-config-name}"
+  name_prefix                 = "${var.launch-config-name}"
   image_id                    = "${var.instance-ami}"
   instance_type               = "${var.instance-type}"
   iam_instance_profile        = "${var.iam-role-name != "" ? var.iam-role-name : ""}"
@@ -10,6 +10,10 @@ resource "aws_launch_configuration" "launch_config" {
   user_data                   = "${var.user-data-script != "" ? file("${var.user-data-script}") : ""}"
   associate_public_ip_address = "${var.instance-associate-public-ip == "true" ? true : false}"
   security_groups             = ["${aws_security_group.sg.id}"]
+
+  lifecycle = {
+    create_before_destroy = true
+  }
 }
 
 # AutoScaling Group
@@ -26,6 +30,16 @@ resource "aws_autoscaling_group" "asg" {
   health_check_grace_period = 300
   health_check_type         = "EC2"
   force_delete              = true
+
+  lifecycle = {
+    create_before_destroy = true
+  }
+
+  tag = {
+    key                 = "Name"
+    value               = "${var.instance-tag-name}"
+    propagate_at_launch = true
+  }
 }
 
 # AutoScaling Attachment
