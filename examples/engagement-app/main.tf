@@ -25,7 +25,6 @@ module "asg-local" {
 // This is the exact same block,
 // but uses the module from the terraform registry
 
-
 # module "asg-registry" {
 #   source  = "EconomistDigitalSolutions/asg/aws"
 #   version = "1.0.4"

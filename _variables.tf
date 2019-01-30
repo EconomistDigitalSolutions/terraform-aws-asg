@@ -169,3 +169,15 @@ variable "ssh-allowed-ips" {
   type        = "list"
   default     = []
 }
+
+variable "health-check-path" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = "/"
+}
+
+variable "health-check-port" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = "80"
+}
