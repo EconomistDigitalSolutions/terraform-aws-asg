@@ -126,26 +126,28 @@ Simplified illustration of the deployed stack:
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| aws-profile | The name of the AWS shared credentials account. | string | - | yes |
-| aws-region | The AWS region | string | - | yes |
 | alb-name | The application Load Balancer name | string | `app-load-balancer-w-terraform` | no |
 | asg-def-size | The default/recommended size of the Auto Scaling Group | string | `3` | no |
 | asg-max-size | The maximum size of the Auto Scaling Group | string | `4` | no |
 | asg-min-size | The minimum size of the Auto Scaling Group | string | `2` | no |
 | asg-name | The name of the Auto Scaling Group | string | `ASG-created-with-terraform` | no |
+| aws-profile | The name of the AWS shared credentials account. | string | - | yes |
+| aws-region | The AWS region | string | - | yes |
 | domain-name | The apps public domain name | string | `` | no |
 | environment | The environment (production/staging) | string | `staging` | no |
 | iam-role-name | The IAM role to assign to the instance | string | `` | no |
 | ig-tag-name | The name to apply to the Internet gateway tag | string | `aws-ig-created-with-terraform` | no |
-| instance-ami | The AMI (Amazon Machine Image) that identifies the instance | string | `ami-01419b804382064e4` | no |
+| instance-ami | The AMI (Amazon Machine Image) that identifies the instance | string | `ami-01419b804382064e4` |no |
 | instance-associate-public-ip | Defines if the EC2 instance has a public IP address. | string | `true` | no |
-| instance-key-name | The name of the SSH key to associate to the instance. Note that the key must exist already. | string | `` | no |
+| instance-key-name | The name of the SSH key to associate to the instance. Note that the key must exist already.| string | `` | no |
 | instance-tag-name | instance-tag-name | string | `EC2-instance-created-with-terraform` | no |
 | instance-type | The instance type to be used | string | `t2.micro` | no |
 | launch-config-name | The name of the launch configuration | string | `launch-configuration-created-with-terraform` | no |
 | placement-group-name | The name of the placement group | string | `placement-group-created-w-terraform` | no |
-| sg-alb-tag-name | The name of the SG associated with the ALB | string | `SG-to-theapp-load-balancer-with-terraform`| no |
+| sg-alb-tag-name | The name of the SG associated with the ALB | string | `SG-to-theapp-load-balancer-with-terraform` | no |
 | sg-tag-name | The Name to apply to the security group | string | `SG-created-with-terraform` | no |
+| ssh-allowed-ips | The list of IPs that are allowed to SSH into the instances | list | `<list>` | no |
+| sub-domain-name | The apps public sub domain name | string | `` | no |
 | subnet-1-cidr-block | The CIDR block to associate to the subnet | string | `10.0.0.0/24` | no |
 | subnet-2-cidr-block | The CIDR block to associate to the subnet | string | `10.0.1.0/24` | no |
 | subnet-tag-name | The Name to apply to the VPN | string | `VPN-created-with-terraform` | no |
