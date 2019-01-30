@@ -135,9 +135,12 @@ Simplified illustration of the deployed stack:
 | aws-region | The AWS region | string | - | yes |
 | domain-name | The apps public domain name | string | `` | no |
 | environment | The environment (production/staging) | string | `staging` | no |
+| health-check-path | The apps public sub domain name | string | `/` | no |
+| health-check-port | The apps public sub domain name | string | `80` | no |
 | iam-role-name | The IAM role to assign to the instance | string | `` | no |
 | ig-tag-name | The name to apply to the Internet gateway tag | string | `aws-ig-created-with-terraform` | no |
-| instance-ami | The AMI (Amazon Machine Image) that identifies the instance | string | `ami-01419b804382064e4` |no |
+| instance-ami | The AMI (Amazon Machine Image) that identifies the instance | string | `ami-01419b804382064e4` |
+no |
 | instance-associate-public-ip | Defines if the EC2 instance has a public IP address. | string | `true` | no |
 | instance-key-name | The name of the SSH key to associate to the instance. Note that the key must exist already.| string | `` | no |
 | instance-tag-name | instance-tag-name | string | `EC2-instance-created-with-terraform` | no |
