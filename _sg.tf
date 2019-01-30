@@ -11,16 +11,16 @@ resource "aws_security_group" "sg" {
   }
 
   ingress {
-    protocol    = "tcp"
-    from_port   = "80"
-    to_port     = "80"
+    protocol        = "tcp"
+    from_port       = "80"
+    to_port         = "80"
     security_groups = ["${aws_security_group.sg_alb.id}"]
   }
 
   ingress {
-    protocol    = "tcp"
-    from_port   = "443"
-    to_port     = "443"
+    protocol        = "tcp"
+    from_port       = "443"
+    to_port         = "443"
     security_groups = ["${aws_security_group.sg_alb.id}"]
   }
 
