@@ -20,7 +20,8 @@ resource "aws_launch_configuration" "launch_config" {
 # Scale (up/down) the number of machines, based on some criteria
 #
 resource "aws_autoscaling_group" "asg" {
-  name                      = "${var.asg-name}"
+  # name                      = "${var.asg-name}"
+  name                      = "${aws_launch_configuration.launch_config.name}"
   min_size                  = "${var.asg-min-size}"
   desired_capacity          = "${var.asg-def-size}"
   max_size                  = "${var.asg-max-size}"
