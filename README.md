@@ -167,17 +167,15 @@ None
 
 ## Considerations
 
-* Investigate the pros/cons of lanch configuration/template.
-
 * Consider the addition of CloudFront Distribution (CFD) to serve as a Content Distribution Network (CDN).
 
-* Assert that changes to the infrastructure code are reflected on AWS.
-
-* Assert that code changes are reflected on the app running on AWS.
-
 * Consider the usage of Spot Instances to reduce costs.
+  
+* ~~Assert that code changes are reflected on the app running on AWS.~~
+  * this is live from version v1.0.5 onwards, **as long as the user-data script changes.**
 
-* Consider moving the instances to a private subnet.
+* ~~Consider moving the instances to a private subnet.~~
+  * this is live from version v1.0.5 onwards
 
 <hr/>
 
@@ -189,8 +187,6 @@ None
 <hr/>
 
 ## Bugs/Known Issues
-
-* can not change instance launch configuration (leads to terraform error).
 
 * changing the AWS region requires changing the machine AMI.
 
