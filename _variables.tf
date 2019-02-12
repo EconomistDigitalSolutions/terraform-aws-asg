@@ -181,3 +181,27 @@ variable "health-check-port" {
   type        = "string"
   default     = "80"
 }
+
+variable "product" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = ""
+}
+
+variable "project" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = ""
+}
+
+variable "emergency-contact" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = ""
+}
+
+variable "owner" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = ""
+}

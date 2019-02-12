@@ -7,6 +7,8 @@ resource "aws_lb" "alb" {
   security_groups            = ["${aws_security_group.sg_alb.id}"]
   subnets                    = ["${aws_subnet.subnet-1.id}", "${aws_subnet.subnet-2.id}"]
   enable_deletion_protection = false
+
+  tags = "${local.common_tags}"
 }
 
 resource "aws_lb_target_group" "lb_target" {
@@ -22,6 +24,8 @@ resource "aws_lb_target_group" "lb_target" {
     port     = "${var.health-check-port}"
     matcher  = "200-299"
   }
+
+  tags = "${local.common_tags}"
 }
 
 resource "aws_lb_listener" "lb_listener" {

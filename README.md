@@ -192,3 +192,16 @@ None
 
 ## Bugs/Known Issues
 
+* when changing region:
+  ```
+  Error: Error refreshing state: 2 error(s) occurred:
+
+    * module.asg-local.aws_lb_target_group.lb_target: 1 error(s) occurred:
+
+    * module.asg-local.aws_lb_target_group.lb_target: aws_lb_target_group.lb_target: Error retrieving Target Group: ValidationError: 'arn:aws:elasticloadbalancing:us-east-1:199344973012:targetgroup/AMP-engagement-app-tg/8fb2e6812fcc1d6f' is not a valid target group ARN
+            status code: 400, request id: 5adcecfa-2ebf-11e9-a89d-51df5bf38c9b
+    * module.asg-local.aws_lb.alb: 1 error(s) occurred:
+
+    * module.asg-local.aws_lb.alb: aws_lb.alb: Error retrieving ALB: ValidationError: 'arn:aws:elasticloadbalancing:us-east-1:199344973012:loadbalancer/app/rafa-lizzie-alb/ccbf16e255c2f904' is not a valid load balancer ARN
+            status code: 400, request id: 5b29fc2d-2ebf-11e9-9e4f-af672960d636
+  ```

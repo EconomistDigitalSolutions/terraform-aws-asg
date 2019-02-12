@@ -12,13 +12,19 @@ module "asg-local" {
   alb-name             = "rafa-lizzie-alb"
   //instance-key-name    = "engage-paris-key"
   instance-type        = "t2.medium"
-  instance-tag-name    = "AMP-app-ec2-instance" 
-  placement-group-name = "rafa-lizzie-pg"
-  target-group-name    = "rafa-lizzie-tg"
-  asg-name             = "rafa-lizzie-asg"
-  launch-config-name   = "rafa-lizzie-lc"
+  instance-tag-name    = "AMP-engagement-app-ASG-instance" 
+  placement-group-name = "AMP-engagement-app-pg"
+  target-group-name    = "AMP-engagement-app-tg"
+  asg-name             = "AMP-engagement-app-Auto-Scaling-Group"
+  launch-config-name   = "AMP-engagement-app-lc"
   iam-role-name        = "engage-ECR-read"
+  environment          = "production"
   ssh-allowed-ips      = ["62.255.97.196/32", "62.255.97.197/32"]
+  
+  owner = "Engagement Team"
+  project = "Engagement"
+  product = "Engagement AMP App"
+  emergency-contact = "rafaelmarques@economist.com"
 }
 
 // This is the exact same block,

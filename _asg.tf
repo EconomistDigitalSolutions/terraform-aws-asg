@@ -14,7 +14,6 @@ data "aws_ami" "linux-aws" {
 #
 resource "aws_launch_configuration" "launch_config" {
   name_prefix                 = "${var.launch-config-name}"
-  # image_id                  = "${var.instance-ami}"
   image_id                    = "${data.aws_ami.linux-aws.image_id}"
   instance_type               = "${var.instance-type}"
   iam_instance_profile        = "${var.iam-role-name != "" ? var.iam-role-name : ""}"
@@ -47,12 +46,18 @@ resource "aws_autoscaling_group" "asg" {
   lifecycle = {
     create_before_destroy = true
   }
+  
+  tags = ["${concat(
+    local.common_tags_asg,
+    list(
+      map(
+        "key", "Name", 
+        "value", "${var.instance-tag-name}",
+        "propagate_at_launch", true
+      )
+    )
+  )}"]
 
-  tag = {
-    key                 = "Name"
-    value               = "${var.instance-tag-name}"
-    propagate_at_launch = true
-  }
 }
 
 # AutoScaling Attachment
