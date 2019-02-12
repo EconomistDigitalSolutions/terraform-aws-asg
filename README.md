@@ -177,31 +177,24 @@ None
 * ~~Consider moving the instances to a private subnet.~~
   * this is live from version v1.0.5 onwards
 
-* changing the AWS region requires changing the machine AMI.
+* ~~changing the AWS region requires changing the machine AMI.~~
   * this was fixed from version v1.0.6 onwards, **but it is limited to the use of Amazon Linux only**
+
+* ~~add tagging utilities~~
+  * this is fixed from version v1.0.7 onwards, trought the use of the *locals*
 
 
 <hr/>
 
 ## ToDo's
 
-* add strong tagging utilities!
 * add outputs
 
 <hr/>
 
 ## Bugs/Known Issues
 
-* when changing region:
-  ```
-  Error: Error refreshing state: 2 error(s) occurred:
-
-    * module.asg-local.aws_lb_target_group.lb_target: 1 error(s) occurred:
-
-    * module.asg-local.aws_lb_target_group.lb_target: aws_lb_target_group.lb_target: Error retrieving Target Group: ValidationError: 'arn:aws:elasticloadbalancing:us-east-1:199344973012:targetgroup/AMP-engagement-app-tg/8fb2e6812fcc1d6f' is not a valid target group ARN
-            status code: 400, request id: 5adcecfa-2ebf-11e9-a89d-51df5bf38c9b
-    * module.asg-local.aws_lb.alb: 1 error(s) occurred:
-
-    * module.asg-local.aws_lb.alb: aws_lb.alb: Error retrieving ALB: ValidationError: 'arn:aws:elasticloadbalancing:us-east-1:199344973012:loadbalancer/app/rafa-lizzie-alb/ccbf16e255c2f904' is not a valid load balancer ARN
-            status code: 400, request id: 5b29fc2d-2ebf-11e9-9e4f-af672960d636
-  ```
+* when changing region - can not migrate load-balancer
+  * this issue is currently open on:
+    * stackoverflow [https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform](https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform)
+    * Terraform [https://github.com/terraform-providers/terraform-provider-aws/issues/7517](https://github.com/terraform-providers/terraform-provider-aws/issues/7517)
