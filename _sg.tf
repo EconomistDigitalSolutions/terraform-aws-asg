@@ -31,9 +31,13 @@ resource "aws_security_group" "sg" {
     to_port     = "0"
   }
 
-  tags = {
-    Name = "${var.sg-tag-name}"
-  }
+  tags = "${merge(
+    local.common_tags,
+    map(
+      "Name", "${var.sg-tag-name}"
+    )
+  )}"
+
 }
 
 # Security Group for ALB
@@ -62,7 +66,11 @@ resource "aws_security_group" "sg_alb" {
     to_port     = "0"
   }
 
-  tags = {
-    Name = "${var.sg-alb-tag-name}"
-  }
+  tags = "${merge(
+    local.common_tags,
+    map(
+      "Name", "${var.sg-alb-tag-name}"
+    )
+  )}"
+
 }

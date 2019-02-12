@@ -177,18 +177,24 @@ None
 * ~~Consider moving the instances to a private subnet.~~
   * this is live from version v1.0.5 onwards
 
-* changing the AWS region requires changing the machine AMI.
+* ~~changing the AWS region requires changing the machine AMI.~~
   * this was fixed from version v1.0.6 onwards, **but it is limited to the use of Amazon Linux only**
+
+* ~~add tagging utilities~~
+  * this is fixed from version v1.0.7 onwards, trought the use of the *locals*
 
 
 <hr/>
 
 ## ToDo's
 
-* add strong tagging utilities!
 * add outputs
 
 <hr/>
 
 ## Bugs/Known Issues
 
+* when changing region - can not migrate load-balancer
+  * this issue is currently open on:
+    * stackoverflow [https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform](https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform)
+    * Terraform [https://github.com/terraform-providers/terraform-provider-aws/issues/7517](https://github.com/terraform-providers/terraform-provider-aws/issues/7517)
