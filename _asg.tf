@@ -1,9 +1,21 @@
+# Find machine image
+data "aws_ami" "linux-aws" {
+  most_recent = true
+
+  filter {
+    name = "name"
+    values = ["amzn-ami-hvm-2018*"]
+  }
+}
+
+
 # Launch configuration
 # Configures the machines that are deployed
 #
 resource "aws_launch_configuration" "launch_config" {
   name_prefix                 = "${var.launch-config-name}"
-  image_id                    = "${var.instance-ami}"
+  # image_id                  = "${var.instance-ami}"
+  image_id                    = "${data.aws_ami.linux-aws.image_id}"
   instance_type               = "${var.instance-type}"
   iam_instance_profile        = "${var.iam-role-name != "" ? var.iam-role-name : ""}"
   key_name                    = "${var.instance-key-name != "" ? var.instance-key-name : ""}"

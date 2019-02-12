@@ -177,6 +177,10 @@ None
 * ~~Consider moving the instances to a private subnet.~~
   * this is live from version v1.0.5 onwards
 
+* changing the AWS region requires changing the machine AMI.
+  * this was fixed from version v1.0.6 onwards, **but it is limited to the use of Amazon Linux only**
+
+
 <hr/>
 
 ## ToDo's
@@ -187,7 +191,4 @@ None
 <hr/>
 
 ## Bugs/Known Issues
-
-* changing the AWS region requires changing the machine AMI.
-
 
