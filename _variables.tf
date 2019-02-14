@@ -205,3 +205,9 @@ variable "owner" {
   type        = "string"
   default     = ""
 }
+
+variable "git-hash" {
+  description = "The apps public sub domain name"
+  type        = "string"
+  default     = ""
+}

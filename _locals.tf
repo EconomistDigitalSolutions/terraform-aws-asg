@@ -6,6 +6,7 @@ locals {
     Owner             = "${var.owner}"
     Environment       = "${var.environment}"
     LastUpdate        = "${timestamp()}"
+    GitHash           = "${var.git-hash}"
   }
 }
 
@@ -18,8 +19,8 @@ locals {
       "propagate_at_launch" = true
     },
     {
-      "key" = "LastUpdate"
-      "value" = "${timestamp()}"
+      "key" = "Project",
+      "value" = "${var.project}",
       "propagate_at_launch" = true
     },
     {
@@ -36,6 +37,16 @@ locals {
       "key" = "Environment"
       "value" = "${var.environment}"
       "propagate_at_launch" = true
-    }    
+    },
+    {
+      "key" = "GitHash"
+      "value" = "${var.git-hash}"
+      "propagate_at_launch" = true
+    },
+    {
+      "key" = "LastUpdate"
+      "value" = "${timestamp()}"
+      "propagate_at_launch" = true
+    }   
   ]
 }
