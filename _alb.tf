@@ -7,6 +7,8 @@ resource "aws_lb" "alb" {
   security_groups            = ["${aws_security_group.sg_alb.id}"]
   subnets                    = ["${aws_subnet.subnet-1.id}", "${aws_subnet.subnet-2.id}"]
   enable_deletion_protection = false
+
+  tags = "${local.common_tags}"
 }
 
 resource "aws_lb_target_group" "lb_target" {
@@ -14,9 +16,22 @@ resource "aws_lb_target_group" "lb_target" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc.id}"
+  # slow_start = 120
+
+  health_check = {
+    interval = 6
+    timeout  = 5
+    path     = "${var.health-check-path}"
+    port     = "${var.health-check-port}"
+    matcher  = "200"
+  }
+
+  tags = "${local.common_tags}"
 }
 
 resource "aws_lb_listener" "lb_listener" {
+  # depends_on = ["aws_lb_target_group.lb_target"]
+
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = "80"
   protocol          = "HTTP"
@@ -26,4 +41,3 @@ resource "aws_lb_listener" "lb_listener" {
     target_group_arn = "${aws_lb_target_group.lb_target.arn}"
   }
 }
-

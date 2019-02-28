@@ -5,23 +5,23 @@ resource "aws_security_group" "sg" {
 
   ingress {
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["${var.ssh-allowed-ips}"]
     from_port   = "22"
     to_port     = "22"
   }
 
   ingress {
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port   = "80"
-    to_port     = "80"
+    protocol        = "tcp"
+    from_port       = "80"
+    to_port         = "80"
+    security_groups = ["${aws_security_group.sg_alb.id}"]
   }
 
   ingress {
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-    from_port   = "443"
-    to_port     = "443"
+    protocol        = "tcp"
+    from_port       = "443"
+    to_port         = "443"
+    security_groups = ["${aws_security_group.sg_alb.id}"]
   }
 
   egress {
@@ -31,9 +31,13 @@ resource "aws_security_group" "sg" {
     to_port     = "0"
   }
 
-  tags = {
-    Name = "${var.sg-tag-name}"
-  }
+  tags = "${merge(
+    local.common_tags,
+    map(
+      "Name", "${var.sg-tag-name}"
+    )
+  )}"
+
 }
 
 # Security Group for ALB
@@ -62,7 +66,11 @@ resource "aws_security_group" "sg_alb" {
     to_port     = "0"
   }
 
-  tags = {
-    Name = "${var.sg-alb-tag-name}"
-  }
+  tags = "${merge(
+    local.common_tags,
+    map(
+      "Name", "${var.sg-alb-tag-name}"
+    )
+  )}"
+
 }
