@@ -16,21 +16,14 @@ resource "aws_lb_target_group" "lb_target" {
   port     = 80
   protocol = "HTTP"
   vpc_id   = "${aws_vpc.vpc.id}"
-<<<<<<< HEAD
   # slow_start = 120
-=======
->>>>>>> ff64900f54abc8870484f31ea072b78a442c3f11
 
   health_check = {
     interval = 6
     timeout  = 5
     path     = "${var.health-check-path}"
     port     = "${var.health-check-port}"
-<<<<<<< HEAD
     matcher  = "200"
-=======
-    matcher  = "200-299"
->>>>>>> ff64900f54abc8870484f31ea072b78a442c3f11
   }
 
   tags = "${local.common_tags}"
