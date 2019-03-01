@@ -2,7 +2,10 @@
 data "aws_ami" "linux-aws" {
   most_recent = true
 
-  owners = ["099720109477"] # Canonical
+ filter {
+   name   = "owner-alias"
+   values = ["amazon"]
+ }
 
   filter {
     name = "name"
