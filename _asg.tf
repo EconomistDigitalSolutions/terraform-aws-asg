@@ -2,7 +2,7 @@
 data "aws_ami" "linux-aws" {
   most_recent = true
 
-  owners = ["amazon"]
+  owners = ["amazon", "099720109477"]
   
   filter {
     name = "name"
