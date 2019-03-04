@@ -37,7 +37,6 @@ resource "aws_security_group" "sg" {
       "Name", "${var.sg-tag-name}"
     )
   )}"
-
 }
 
 # Security Group for ALB
@@ -72,5 +71,4 @@ resource "aws_security_group" "sg_alb" {
       "Name", "${var.sg-alb-tag-name}"
     )
   )}"
-
 }
