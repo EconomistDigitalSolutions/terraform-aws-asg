@@ -15,4 +15,4 @@ sudo docker pull rafaelmarques7/hello-node:latest
 # run docker app
 sudo docker run -d -p 80:80 rafaelmarques7/hello-node:latest
 
-echo "Hello Sire, whats up good??! kiss kiss ;)!" > text.txt
+echo "Hello!" > text.txt
