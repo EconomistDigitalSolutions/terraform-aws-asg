@@ -1,5 +1,5 @@
 module "asg" {
-  source  = "../../"
+  source = "../../"
 
   # required variables
   aws-profile = "${var.aws-profile}" # provide a profile from ~/.aws/credentials 

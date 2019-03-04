@@ -119,7 +119,7 @@ variable "placement-group-name" {
 variable "target-group-name" {
   description = "The name of the placement group"
   type        = "string"
-  default     = "target-group-created-w-terraform"
+  default     = "lb-tg"
 }
 
 variable "launch-config-name" {
@@ -137,19 +137,19 @@ variable "asg-name" {
 variable "asg-min-size" {
   description = "The minimum size of the Auto Scaling Group"
   type        = "string"
-  default     = "2"
+  default     = 2
 }
 
 variable "asg-max-size" {
   description = "The maximum size of the Auto Scaling Group"
   type        = "string"
-  default     = "4"
+  default     = 4
 }
 
 variable "asg-def-size" {
   description = "The default/recommended size of the Auto Scaling Group"
   type        = "string"
-  default     = "3"
+  default     = 3
 }
 
 variable "domain-name" {

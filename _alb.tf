@@ -12,14 +12,15 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "lb_target" {
-  name     = "${var.target-group-name}"
-  port     = 80
-  protocol = "HTTP"
-  vpc_id   = "${aws_vpc.vpc.id}"
-  # slow_start = 120
+  name_prefix = "${var.target-group-name}"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = "${aws_vpc.vpc.id}"
 
   health_check = {
-    interval = 6
+    interval = 30
+    healthy_threshold = 5
+    unhealthy_threshold = 5
     timeout  = 5
     path     = "${var.health-check-path}"
     port     = "${var.health-check-port}"
@@ -30,8 +31,6 @@ resource "aws_lb_target_group" "lb_target" {
 }
 
 resource "aws_lb_listener" "lb_listener" {
-  # depends_on = ["aws_lb_target_group.lb_target"]
-
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = "80"
   protocol          = "HTTP"
