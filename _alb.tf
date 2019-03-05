@@ -44,11 +44,11 @@ resource "aws_lb_listener" "lb_listener" {
   port              = "443"
   protocol          = "HTTPS"
   ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = "arn:aws:acm:eu-west-2:065882805973:certificate/ee9dc01b-3373-46df-aa07-9f8574c036af"
+  stage_certificate_arn = "arn:aws:acm:eu-west-2:065882805973:certificate/ce19aba3-d506-48cf-a2de-c097b92b7303"
+  prod_certificat_arn = ""
 
   default_action {
     type             = "forward"
     alb_target_group_arn = "${aws_lb_target_group.lb_target.arn}"
   }
-}
 }
