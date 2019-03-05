@@ -1,36 +1,27 @@
 #!/bin/bash
 
-# basic patching
+# ======================================================================= # 
+#     This script installs docker, loads a docker app from ECR,           #
+#                 and makes it run in the background.                     #
+#     This script is configured for                                       #
+#         * the ds-web-products-staging account,                          #
+#         * a Amazon Linux AMI (version 1) (the second from the list)     #
+# ======================================================================= # 
+
+# update packages
 sudo yum -y update
 
-# docker
+# download and start docker
 sudo yum -y install docker
-sudo service docker start
+#sudo systemctl start docker
+sudo service docker start 
 
-# docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-sudo chmod +x /usr/local/bin/docker-compose
-sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-
-# login to ECR
+# login to registery
 sudo aws ecr get-login --no-include-email --region eu-west-2 > login.sh
 sudo bash login.sh
 
-# get docker-compose from S3
-sudo aws s3api get-object \
-  --bucket docker-compose-engagement \
-  --key docker-compose.yml \
-  docker-compose.yml
+# pull docker app
+sudo docker pull 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:2e5afc38ba02a6560c386acd6a5d925f0b9f1588
 
-# get nginx configuration
-sudo mkdir container-balancer && cd container-balancer
-sudo aws s3api get-object \
-  --bucket docker-compose-engagement \
-  --key container-balancer/nginx.conf \
-  nginx.conf
-
-# create /etc/nginx directory if not exists
-sudo mkdir -p /etc/nginx
-
-# run app
-sudo docker-compose up
+# run docker app
+sudo docker run -d -p 80:80 --name engagement-app 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:2e5afc38ba02a6560c386acd6a5d925f0b9f1588
