@@ -3,56 +3,27 @@
 module "asg-local" {
   source = "../../"
 
-  aws-profile      = "ds-web-products-prod"
-  aws-region       = "us-east-1"
+  aws-profile      = "ds-web-products-staging"
+  aws-region       = "eu-west-2"
   user-data-script = "./user-data.sh"
-  asg-min-size     = "1"
+  asg-min-size     = "2"
   asg-max-size     = "4"
   asg-def-size     = "2"
   alb-name         = "rafa-lizzie-alb"
 
   //instance-key-name    = "engage-paris-key"
   instance-type        = "t2.medium"
-  instance-tag-name    = "AMP-engagement-app-ASG-instance"
-  placement-group-name = "AMP-engagement-app-pg"
-  target-group-name    = "AMP-engagement-app-tg"
-  asg-name             = "AMP-engagement-app-Auto-Scaling-Group"
+  instance-tag-name    = "rl-instance"
+  placement-group-name = "rl-group"
+  target-group-name    = "rl-tg"
   launch-config-name   = "AMP-engagement-app-lc"
   iam-role-name        = "engage-ECR-read"
-  environment          = "production"
+  environment          = "staging"
   ssh-allowed-ips      = ["62.255.97.196/32", "62.255.97.197/32"]
 
-  owner             = "Engagement Team"
-  project           = "Engagement"
-  product           = "Engagement AMP App"
-  emergency-contact = "rafaelmarques@economist.com"
+  owner                 = "Engagement Team"
+  project               = "Engagement"
+  product               = "Engagement AMP App"
+  emergency-contact     = "rafaelmarques@economist.com"
+  ssl_certificate_arn   = "arn:aws:acm:eu-west-2:065882805973:certificate/ce19aba3-d506-48cf-a2de-c097b92b7303"
 }
-
-// This is the exact same block,
-// but uses the module from the terraform registry
-
-
-# module "asg-registry" {
-#   source  = "EconomistDigitalSolutions/asg/aws"
-#   version = "1.0.4"
-
-
-#   aws-profile          = "ds-web-products-staging"
-#   aws-region           = "eu-west-3"
-#   instance-ami         = "ami-0dd7e7ed60da8fb83"
-#   user-data-script     = "./user-data.sh"
-#   asg-min-size         = "2"
-#   asg-max-size         = "4"
-#   asg-def-size         = "2"
-#   alb-name             = "rafa-lizzie-alb"
-#   instance-key-name    = "engage-paris-key"
-#   instance-type        = "t2.medium"
-#   instance-tag-name    = "AMP-app-ec2-instance" 
-#   placement-group-name = "rafa-lizzie-pg"
-#   target-group-name    = "rafa-lizzie-tg"
-#   asg-name             = "rafa-lizzie-asg"
-#   launch-config-name   = "rafa-lizzie-lc"
-#   iam-role-name        = "engage-ECR-read"
-#   ssh-allowed-ips      = ["62.255.97.196/32", "62.255.97.197/32"]
-# }
-
