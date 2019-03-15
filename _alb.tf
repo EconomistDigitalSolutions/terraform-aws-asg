@@ -31,6 +31,8 @@ resource "aws_lb_target_group" "lb_target" {
 }
 
 resource "aws_lb_listener" "lb_listener" {
+  count = "${var.use_https_only == "true" ? 0 : 1}"
+
   load_balancer_arn = "${aws_lb.alb.arn}"
   port              = "80"
   protocol          = "HTTP"
@@ -38,6 +40,24 @@ resource "aws_lb_listener" "lb_listener" {
   default_action = {
     type             = "forward"
     target_group_arn = "${aws_lb_target_group.lb_target.arn}"
+  }
+}
+
+resource "aws_lb_listener" "lb_listener_redirect_http" {
+  count = "${var.use_https_only == "true" ? 1 : 0}"
+  
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "redirect"
+
+    redirect {
+      port = "443"
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
   }
 }
 

@@ -217,3 +217,9 @@ variable "ssl_certificate_arn" {
   type = "string"
   default = ""
 }
+
+variable "use_https_only" {
+  description = "If true, forces all http traffic to https"
+  type = "string"
+  default = "false"
+}
