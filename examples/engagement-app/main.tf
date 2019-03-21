@@ -25,5 +25,5 @@ module "asg-local" {
   project               = "Engagement"
   product               = "Engagement AMP App"
   emergency-contact     = "rafaelmarques@economist.com"
-  ssl_certificate_arn   = "arn:aws:acm:eu-west-2:065882805973:certificate/ce19aba3-d506-48cf-a2de-c097b92b7303"
+  ssl_certificate_arn   = "arn:aws:acm:eu-west-2:199344973012:certificate/07e1eb29-91dc-4e5b-b1eb-e9dfd0201d0a"
 }
