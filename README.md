@@ -70,9 +70,129 @@ To use this module, it is advised to carefully follow these instructions:
 
 ## Implementation details
 
-Below is a simplified and complete list of the AWS resources deployed.
+resource "aws_lb_listener" "lb_listener" {
+  count = "${var.use_https_only == "true" ? 0 : 1}"
 
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
 
+  default_action = {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
+  }
+}
+
+resource "aws_lb_listener" "lb_listener_redirect_http" {
+  count = "${var.use_https_only == "true" ? 1 : 0}"
+  
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "redirect"
+
+    redirect {
+      port = "443"
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "lb_listener" {
+  count = "${var.use_https_only == "true" ? 0 : 1}"
+
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
+  }
+}
+
+resource "aws_lb_listener" "lb_listener_redirect_http" {
+  count = "${var.use_https_only == "true" ? 1 : 0}"
+  
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "redirect"
+
+    redirect {
+      port = "443"
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}resources deployed.
+
+resource "aws_lb_listener" "lb_listener" {
+  count = "${var.use_https_only == "true" ? 0 : 1}"
+
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
+  }
+}
+
+resource "aws_lb_listener" "lb_listener_redirect_http" {
+  count = "${var.use_https_only == "true" ? 1 : 0}"
+  
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "redirect"
+
+    redirect {
+      port = "443"
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
+
+resource "aws_lb_listener" "lb_listener" {
+  count = "${var.use_https_only == "true" ? 0 : 1}"
+
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "forward"
+    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
+  }
+}
+
+resource "aws_lb_listener" "lb_listener_redirect_http" {
+  count = "${var.use_https_only == "true" ? 1 : 0}"
+  
+  load_balancer_arn = "${aws_lb.alb.arn}"
+  port              = "80"
+  protocol          = "HTTP"
+
+  default_action = {
+    type             = "redirect"
+
+    redirect {
+      port = "443"
+      protocol = "HTTPS"
+      status_code = "HTTP_301"
+    }
+  }
+}
 The **simplified** stack:
   * Compute
     * EC2 instances
