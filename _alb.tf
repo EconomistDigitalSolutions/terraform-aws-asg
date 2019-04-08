@@ -18,10 +18,10 @@ resource "aws_lb_target_group" "lb_target" {
   vpc_id      = "${aws_vpc.vpc.id}"
 
   health_check = {
-    interval = 30
-    healthy_threshold = 5
-    unhealthy_threshold = 5
-    timeout  = 5
+    interval = "${var.health_check_interval}"
+    healthy_threshold = "${var.health_check_threshold}"
+    unhealthy_threshold = "${var.health_check_threshold}"
+    timeout  = "${var.health_check_threshold}"
     path     = "${var.health-check-path}"
     port     = "${var.health-check-port}"
     matcher  = "200"

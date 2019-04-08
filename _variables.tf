@@ -182,6 +182,26 @@ variable "health-check-port" {
   default     = "80"
 }
 
+variable "health_check_interval" {
+  description = "The interval between health checks"
+  type = "string"
+  default = 5
+}
+
+
+variable "health_check_threshold" {
+  description = "The number of consecutive health checks to be considered (un)healthy."
+  type = "string"
+  default = 3
+}
+
+variable "health_check_grace_period" {
+  description = "Time (in seconds) after instance comes into service before checking health."
+  type = "string"
+  default = 3
+}
+
+
 variable "product" {
   description = "The apps public sub domain name"
   type        = "string"
@@ -223,3 +243,4 @@ variable "use_https_only" {
   type = "string"
   default = "false"
 }
+
