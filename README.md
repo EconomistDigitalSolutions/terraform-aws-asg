@@ -259,7 +259,7 @@ Simplified illustration of the deployed stack:
 | health-check-path | The apps public sub domain name | string | `/` | no |
 | health-check-port | The apps public sub domain name | string | `80` | no |
 | health\_check\_grace\_period | Time (in seconds) after instance comes into service before checking health. | string | `3` | no |
-| health\_check\_interval | The interval between health checks | string | `5` | no |
+| health\_check\_interval | The time between health checks | string | `5` | no |
 | health\_check\_threshold | The number of consecutive health checks to be considered (un)healthy. | string | `3` | no |
 | iam-role-name | The IAM role to assign to the instance | string | `` | no |
 | ig-tag-name | The name to apply to the Internet gateway tag | string | `aws-ig-created-with-terraform` | no |
