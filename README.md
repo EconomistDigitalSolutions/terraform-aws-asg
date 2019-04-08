@@ -70,129 +70,9 @@ To use this module, it is advised to carefully follow these instructions:
 
 ## Implementation details
 
-resource "aws_lb_listener" "lb_listener" {
-  count = "${var.use_https_only == "true" ? 0 : 1}"
+Below is a simplified and complete list of the AWS resources deployed.
 
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
 
-  default_action = {
-    type             = "forward"
-    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
-  }
-}
-
-resource "aws_lb_listener" "lb_listener_redirect_http" {
-  count = "${var.use_https_only == "true" ? 1 : 0}"
-  
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "redirect"
-
-    redirect {
-      port = "443"
-      protocol = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_lb_listener" "lb_listener" {
-  count = "${var.use_https_only == "true" ? 0 : 1}"
-
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "forward"
-    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
-  }
-}
-
-resource "aws_lb_listener" "lb_listener_redirect_http" {
-  count = "${var.use_https_only == "true" ? 1 : 0}"
-  
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "redirect"
-
-    redirect {
-      port = "443"
-      protocol = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}resources deployed.
-
-resource "aws_lb_listener" "lb_listener" {
-  count = "${var.use_https_only == "true" ? 0 : 1}"
-
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "forward"
-    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
-  }
-}
-
-resource "aws_lb_listener" "lb_listener_redirect_http" {
-  count = "${var.use_https_only == "true" ? 1 : 0}"
-  
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "redirect"
-
-    redirect {
-      port = "443"
-      protocol = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
-
-resource "aws_lb_listener" "lb_listener" {
-  count = "${var.use_https_only == "true" ? 0 : 1}"
-
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "forward"
-    target_group_arn = "${aws_lb_target_group.lb_target.arn}"
-  }
-}
-
-resource "aws_lb_listener" "lb_listener_redirect_http" {
-  count = "${var.use_https_only == "true" ? 1 : 0}"
-  
-  load_balancer_arn = "${aws_lb.alb.arn}"
-  port              = "80"
-  protocol          = "HTTP"
-
-  default_action = {
-    type             = "redirect"
-
-    redirect {
-      port = "443"
-      protocol = "HTTPS"
-      status_code = "HTTP_301"
-    }
-  }
-}
 The **simplified** stack:
   * Compute
     * EC2 instances
@@ -259,7 +139,7 @@ Simplified illustration of the deployed stack:
 | health-check-path | The apps public sub domain name | string | `/` | no |
 | health-check-port | The apps public sub domain name | string | `80` | no |
 | health\_check\_grace\_period | Time (in seconds) after instance comes into service before checking health. | string | `3` | no |
-| health\_check\_interval | The time between health checks | string | `5` | no |
+| health\_check\_interval | The interval between health checks | string | `5` | no |
 | health\_check\_threshold | The number of consecutive health checks to be considered (un)healthy. | string | `3` | no |
 | iam-role-name | The IAM role to assign to the instance | string | `` | no |
 | ig-tag-name | The name to apply to the Internet gateway tag | string | `aws-ig-created-with-terraform` | no |
@@ -326,5 +206,3 @@ None
   * this issue is currently open on:
     * stackoverflow [https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform](https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform)
     * Terraform [https://github.com/terraform-providers/terraform-provider-aws/issues/7517](https://github.com/terraform-providers/terraform-provider-aws/issues/7517)
-
-#
