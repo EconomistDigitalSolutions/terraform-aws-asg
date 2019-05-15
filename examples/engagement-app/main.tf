@@ -4,10 +4,10 @@ module "asg-local" {
   source = "../../"
 
   aws-profile      = "ds-web-products-staging"
-  aws-region       = "eu-west-1"
+  aws-region       = "eu-west-2"
   user-data-script = "./user-data.sh"
-  asg-min-size     = "2"
-  asg-max-size     = "4"
+  asg-min-size     = "1"
+  asg-max-size     = "2"
   asg-def-size     = "2"
   alb-name         = "hct"
 
@@ -24,4 +24,6 @@ module "asg-local" {
   project               = "WE-337"
   product               = "amp"
   emergency-contact     = "rafaelmarques@economist.com"
+
+  ssl_certificate_arn = "arn:aws:acm:eu-west-2:065882805973:certificate/ce19aba3-d506-48cf-a2de-c097b92b7303"
 }

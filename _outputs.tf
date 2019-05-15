@@ -1,10 +1,11 @@
-# output "instance-id" {
-#   description = "The EC2 instance ID"
-#   value       = "${aws_instance.instance.id}"
-# }
+output "domain-load-balancer" {
+  description = "The public domain of the load-balancer"
+  value       = "${aws_lb.alb.dns_name}"
+}
 
-# output "instance-public-dns" {
-#   description = "The EC2 instance public DNS"
-#   value       = "${aws_instance.instance.public_dns}"
-# }
+output "domain-cloudfront-distribution" {
+  count    = "${var.use_cloudfront ? 1 : 0}"
 
+  description = "The public domain of the cloudfront distribution"
+  value       = "${aws_cloudfront_distribution.cdn.domain_name}"
+}
