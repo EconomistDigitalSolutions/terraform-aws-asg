@@ -39,7 +39,7 @@ resource "aws_autoscaling_group" "asg" {
   health_check_grace_period = "${var.health_check_grace_period}"
   health_check_type         = "ELB"
   min_elb_capacity          = "${var.asg-min-size}"
-  
+
   lifecycle = {
     create_before_destroy = true
   }

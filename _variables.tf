@@ -184,23 +184,21 @@ variable "health-check-port" {
 
 variable "health_check_interval" {
   description = "The interval between health checks"
-  type = "string"
-  default = 5
+  type        = "string"
+  default     = 5
 }
-
 
 variable "health_check_threshold" {
   description = "The number of consecutive health checks to be considered (un)healthy."
-  type = "string"
-  default = 3
+  type        = "string"
+  default     = 3
 }
 
 variable "health_check_grace_period" {
   description = "Time (in seconds) after instance comes into service before checking health."
-  type = "string"
-  default = 3
+  type        = "string"
+  default     = 3
 }
-
 
 variable "product" {
   description = "The apps public sub domain name"
@@ -234,13 +232,18 @@ variable "git-hash" {
 
 variable "ssl_certificate_arn" {
   description = "The ARN of the SSL certificate for the load-balancer"
-  type = "string"
-  default = ""
+  type        = "string"
+  default     = ""
 }
 
 variable "use_https_only" {
   description = "If true, forces all http traffic to https"
-  type = "string"
-  default = "false"
+  type        = "string"
+  default     = "false"
 }
 
+variable "use_cloudfront" {
+  description = "If true, will create a CFD distribution"
+  type        = "boolean"
+  default     = false
+}
