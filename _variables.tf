@@ -184,23 +184,21 @@ variable "health-check-port" {
 
 variable "health_check_interval" {
   description = "The interval between health checks"
-  type = "string"
-  default = 5
+  type        = "string"
+  default     = 5
 }
-
 
 variable "health_check_threshold" {
   description = "The number of consecutive health checks to be considered (un)healthy."
-  type = "string"
-  default = 3
+  type        = "string"
+  default     = 3
 }
 
 variable "health_check_grace_period" {
   description = "Time (in seconds) after instance comes into service before checking health."
-  type = "string"
-  default = 3
+  type        = "string"
+  default     = 3
 }
-
 
 variable "product" {
   description = "The apps public sub domain name"
@@ -234,13 +232,68 @@ variable "git-hash" {
 
 variable "ssl_certificate_arn" {
   description = "The ARN of the SSL certificate for the load-balancer"
-  type = "string"
-  default = ""
+  type        = "string"
+  default     = ""
 }
 
 variable "use_https_only" {
   description = "If true, forces all http traffic to https"
-  type = "string"
-  default = "false"
+  type        = "string"
+  default     = "false"
+<<<<<<< HEAD
 }
 
+variable "use_cloudfront" {
+  description = "If true, will create a CFD distribution"
+  type        = "string"
+  default     = "false"
+}
+
+variable "s3_bucket_for_cloudfront_logs" {
+  description = "The name of the S3 bucket that holds the cloudfront logs"
+  type        = "string"
+  default     = ""
+}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 8f2156e... Add variable to control Cloudfronts TTL (#17)
+
+variable "cfd_default_regular_ttl" {
+  description = "The (regular) TTL of the default cache behaviour"
+  type = "string"
+  default = 3600
+}
+
+variable "cfd_default_max_ttl" {
+  description = "The maximum TTL of the default cache behaviour"
+  type = "string"
+  default = 86400
+}
+
+variable "cfd_ordered_regular_ttl" {
+  description = "The (regular) TTL of the ordered cache behaviour(es)"
+  type = "string"
+  default = 3600
+}
+
+variable "cfd_ordered_max_ttl" {
+  description = "The maximum TTL of the ordered cache behaviour(es)"
+  type = "string"
+  default = 86400
+<<<<<<< HEAD
+}
+=======
+}
+
+variable "use_cloudfront" {
+  description = "If true, will create a CFD distribution"
+  type        = "string"
+  default     = "false"
+}
+>>>>>>> 69970ff... Add changes to support Cloudfront distributions (#12)
+=======
+>>>>>>> 97733d2... add variable for logs bucket (#16)
+=======
+}
+>>>>>>> 8f2156e... Add variable to control Cloudfronts TTL (#17)
