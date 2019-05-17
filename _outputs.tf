@@ -4,8 +4,6 @@ output "domain-load-balancer" {
 }
 
 output "domain-cloudfront-distribution" {
-  count    = "${var.use_cloudfront ? 1 : 0}"
-
   description = "The public domain of the cloudfront distribution"
-  value       = "${aws_cloudfront_distribution.cdn.domain_name}"
+  value       = ["${aws_cloudfront_distribution.cdn.domain_name}"]
 }
