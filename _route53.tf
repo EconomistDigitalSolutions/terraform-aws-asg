@@ -5,7 +5,7 @@ data "aws_route53_zone" "primary" {
 }
 
 data "aws_acm_certificate" "example" {
-  count    = "${var.use_cloudfront ? 1 : 0}"
+  count    = "${var.use_cloudfront != "false" ? 1 : 0}"
 
   provider = "aws.useast1"
   domain   = "${var.domain-name}"
@@ -19,8 +19,8 @@ resource "aws_route53_record" "www" {
   type    = "A"
 
   alias = {
-    name                   = "${var.use_cloudfront ? aws_cloudfront_distribution.cdn.domain_name : aws_lb.alb.dns_name}"
-    zone_id                = "${var.use_cloudfront ? aws_cloudfront_distribution.cdn.hosted_zone_id : aws_lb.alb.zone_id}"
+    name                   = "${var.use_cloudfront != "false" ? aws_cloudfront_distribution.cdn.domain_name : aws_lb.alb.dns_name}"
+    zone_id                = "${var.use_cloudfront != "false" ? aws_cloudfront_distribution.cdn.hosted_zone_id : aws_lb.alb.zone_id}"
     evaluate_target_health = true
   }
 }
@@ -34,8 +34,8 @@ resource "aws_route53_record" "sub" {
   type    = "A"
 
   alias = {
-    name                   = "${var.use_cloudfront ? aws_cloudfront_distribution.cdn.domain_name : aws_lb.alb.dns_name}"
-    zone_id                = "${var.use_cloudfront ? aws_cloudfront_distribution.cdn.hosted_zone_id : aws_lb.alb.zone_id}"
+    name                   = "${var.use_cloudfront != "false" ? aws_cloudfront_distribution.cdn.domain_name : aws_lb.alb.dns_name}"
+    zone_id                = "${var.use_cloudfront != "false" ? aws_cloudfront_distribution.cdn.hosted_zone_id : aws_lb.alb.zone_id}"
     evaluate_target_health = true
   }
 }
