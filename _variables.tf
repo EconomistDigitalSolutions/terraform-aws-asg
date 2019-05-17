@@ -247,3 +247,9 @@ variable "use_cloudfront" {
   type        = "string"
   default     = "false"
 }
+
+variable "s3_bucket_for_cloudfront_logs" {
+  description = "The name of the S3 bucket that holds the cloudfront logs"
+  type        = "string"
+  default     = ""
+}

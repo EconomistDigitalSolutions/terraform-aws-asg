@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "s3_bucket_logs" {
   count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
-  bucket = "cdn-logs-123454321"
+  bucket = "${var.s3_bucket_for_cloudfront_logs}"
   acl    = "private"
 }
 
