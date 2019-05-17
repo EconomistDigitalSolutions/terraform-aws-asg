@@ -1,12 +1,12 @@
 resource "aws_s3_bucket" "s3_bucket_logs" {
-  count = "${var.use_cloudfront ? 1 : 0}"
+  count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
   bucket = "cdn-logs-123454321"
   acl    = "private"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
-  count = "${var.use_cloudfront ? 1 : 0}"
+  count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
   aliases = ["${var.domain-name}"]
   enabled = true
