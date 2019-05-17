@@ -244,6 +244,6 @@ variable "use_https_only" {
 
 variable "use_cloudfront" {
   description = "If true, will create a CFD distribution"
-  type        = "boolean"
-  default     = false
+  type        = "string"
+  default     = "false"
 }
