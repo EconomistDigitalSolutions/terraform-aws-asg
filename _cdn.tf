@@ -30,50 +30,6 @@ resource "aws_cloudfront_distribution" "cdn" {
     prefix          = "cnd-logs"
   }
 
-  // DEFAULT CACHE BEHAVIOUR 
-  //  - this is the last one to be applied 
-  //  - this only applies if other did not match
-  default_cache_behavior = {
-    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods   = ["GET", "HEAD"]
-    target_origin_id = "${aws_lb.alb.id}"
-
-    forwarded_values = {
-      query_string = true
-      headers      = ["*"]
-
-      cookies = {
-        forward = "none"
-      }
-    }
-
-    min_ttl                = 0
-    default_ttl            = 900
-    max_ttl                = 3600
-    viewer_protocol_policy = "redirect-to-https"
-  }
-
-  # CACHE WITH PRECEDENCE 0
-  ordered_cache_behavior = {
-    path_pattern     = "/static/*"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "${aws_lb.alb.id}"
-
-    forwarded_values = {
-      query_string = false
-
-      cookies = {
-        forward = "none"
-      }
-    }
-
-    min_ttl                = 0
-    default_ttl            = 900
-    max_ttl                = 3600
-    viewer_protocol_policy = "redirect-to-https"
-  }
-
   restrictions = {
     geo_restriction = {
       restriction_type = "none"
@@ -87,4 +43,92 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   tags = "${local.common_tags}"
+
+  // DEFAULT CACHE BEHAVIOUR 
+  //  - this is the last one to be applied 
+  //  - this only applies if other did not match
+  default_cache_behavior = {
+    allowed_methods  = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods   = ["GET", "HEAD"]
+    target_origin_id = "${aws_lb.alb.id}"
+
+    forwarded_values = {
+      query_string = true
+      headers      = ["Host"]
+      cookies = {
+        forward = "none"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = "${var.cfd_default_regular_ttl}"
+    max_ttl                = "${var.cfd_default_max_ttl}"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  # CACHE WITH PRECEDENCE 0
+  #   - use for static
+  ordered_cache_behavior = {
+    path_pattern     = "/static/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = "${aws_lb.alb.id}"
+
+    forwarded_values = {
+      query_string = false
+      headers      = ["Host"]
+      cookies = {
+        forward = "none"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = "${var.cfd_ordered_regular_ttl}"
+    max_ttl                = "${var.cfd_ordered_max_ttl}"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  # CACHE WITH PRECEDENCE 1
+  #   - use for /_next
+  ordered_cache_behavior = {
+    path_pattern     = "/_next/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = "${aws_lb.alb.id}"
+
+    forwarded_values = {
+      query_string = false
+      headers      = ["Host"]
+      cookies = {
+        forward = "none"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = "${var.cfd_ordered_regular_ttl}"
+    max_ttl                = "${var.cfd_ordered_max_ttl}"
+    viewer_protocol_policy = "redirect-to-https"
+  }
+
+  # CACHE TO BE REJECTED
+  #   - use for /api
+  ordered_cache_behavior = {
+    path_pattern     = "/api/*"
+    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+    cached_methods   = ["GET", "HEAD", "OPTIONS"]
+    target_origin_id = "${aws_lb.alb.id}"
+
+    forwarded_values = {
+      query_string = false
+      headers      = ["Host"]
+      cookies = {
+        forward = "none"
+      }
+    }
+
+    min_ttl                = 0
+    default_ttl            = 0
+    max_ttl                = 0
+    viewer_protocol_policy = "redirect-to-https"
+  }
 }

@@ -253,3 +253,27 @@ variable "s3_bucket_for_cloudfront_logs" {
   type        = "string"
   default     = ""
 }
+
+variable "cfd_default_regular_ttl" {
+  description = "The (regular) TTL of the default cache behaviour"
+  type = "string"
+  default = 3600
+}
+
+variable "cfd_default_max_ttl" {
+  description = "The maximum TTL of the default cache behaviour"
+  type = "string"
+  default = 86400
+}
+
+variable "cfd_ordered_regular_ttl" {
+  description = "The (regular) TTL of the ordered cache behaviour(es)"
+  type = "string"
+  default = 3600
+}
+
+variable "cfd_ordered_max_ttl" {
+  description = "The maximum TTL of the ordered cache behaviour(es)"
+  type = "string"
+  default = 86400
+}
