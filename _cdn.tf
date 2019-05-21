@@ -67,26 +67,26 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   # CACHE WITH PRECEDENCE 0
-  #   - use for static
-  ordered_cache_behavior = {
-    path_pattern     = "/static/*"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "${aws_lb.alb.id}"
+  # #   - use for static
+  # ordered_cache_behavior = {
+  #   path_pattern     = "/static/*"
+  #   allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+  #   cached_methods   = ["GET", "HEAD", "OPTIONS"]
+  #   target_origin_id = "${aws_lb.alb.id}"
 
-    forwarded_values = {
-      query_string = false
-      headers      = ["Host"]
-      cookies = {
-        forward = "none"
-      }
-    }
+  #   forwarded_values = {
+  #     query_string = false
+  #     headers      = ["Host"]
+  #     cookies = {
+  #       forward = "none"
+  #     }
+  #   }
 
-    min_ttl                = 0
-    default_ttl            = "${var.cfd_ordered_regular_ttl}"
-    max_ttl                = "${var.cfd_ordered_max_ttl}"
-    viewer_protocol_policy = "redirect-to-https"
-  }
+  #   min_ttl                = 0
+  #   default_ttl            = "${var.cfd_ordered_regular_ttl}"
+  #   max_ttl                = "${var.cfd_ordered_max_ttl}"
+  #   viewer_protocol_policy = "redirect-to-https"
+  # }
 
   # CACHE WITH PRECEDENCE 1
   #   - use for /_next
@@ -111,24 +111,24 @@ resource "aws_cloudfront_distribution" "cdn" {
   }
 
   # CACHE TO BE REJECTED
-  #   - use for /api
-  ordered_cache_behavior = {
-    path_pattern     = "/api/*"
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD", "OPTIONS"]
-    target_origin_id = "${aws_lb.alb.id}"
+  # #   - use for /api
+  # ordered_cache_behavior = {
+  #   path_pattern     = "/api/*"
+  #   allowed_methods  = ["GET", "HEAD", "OPTIONS"]
+  #   cached_methods   = ["GET", "HEAD", "OPTIONS"]
+  #   target_origin_id = "${aws_lb.alb.id}"
 
-    forwarded_values = {
-      query_string = false
-      headers      = ["Host"]
-      cookies = {
-        forward = "none"
-      }
-    }
+  #   forwarded_values = {
+  #     query_string = false
+  #     headers      = ["Host"]
+  #     cookies = {
+  #       forward = "none"
+  #     }
+  #   }
 
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-    viewer_protocol_policy = "redirect-to-https"
-  }
+  #   min_ttl                = 0
+  #   default_ttl            = 0
+  #   max_ttl                = 0
+  #   viewer_protocol_policy = "redirect-to-https"
+  # }
 }
