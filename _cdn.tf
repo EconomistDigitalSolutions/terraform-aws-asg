@@ -8,9 +8,8 @@ resource "aws_s3_bucket" "s3_bucket_logs" {
 resource "aws_cloudfront_distribution" "cdn" {
   count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
-  aliases = ["${var.domain-name}"]
+  aliases = ["${var.domain-name}", "${local.cdn_hostnames_aliases}"]
   enabled = true
-  comment = ""
 
   origin = {
     domain_name = "${aws_lb.alb.dns_name}"
@@ -42,11 +41,11 @@ resource "aws_cloudfront_distribution" "cdn" {
     acm_certificate_arn      = "${data.aws_acm_certificate.example.arn}"
   }
 
-  tags = "${local.common_tags}"
+  tags = "${local.common_tags_cdn}"
 
   default_cache_behavior = {
-    allowed_methods  = ["GET", "HEAD", "OPTIONS"]
-    cached_methods   = ["GET", "HEAD"]
+    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
+    cached_methods         = ["HEAD", "GET", "OPTIONS"]
     target_origin_id = "${aws_lb.alb.id}"
 
     forwarded_values = {
@@ -62,65 +61,5 @@ resource "aws_cloudfront_distribution" "cdn" {
     default_ttl            = "${var.cfd_default_regular_ttl}"
     max_ttl                = "${var.cfd_default_max_ttl}"
     viewer_protocol_policy = "redirect-to-https"
-  }
-
-  ordered_cache_behavior = {
-    path_pattern           = "/_next/*"                                   // CACHE WITH PRECEDENCE 1 - /_next/*
-    target_origin_id       = "${aws_lb.alb.id}"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
-    min_ttl                = 0
-    default_ttl            = "${var.cfd_default_regular_ttl}"
-    max_ttl                = "${var.cfd_default_max_ttl}"
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values = {
-      query_string = false
-      headers      = ["Host"]
-
-      cookies = {
-        forward = "none"
-      }
-    }
-  }
-
-  ordered_cache_behavior = {
-    path_pattern           = "/static/*"                                // CACHE WITH PRECEDENCE 2 - /static/*
-    target_origin_id       = "${aws_lb.alb.id}"
-    allowed_methods        = ["GET", "HEAD", "OPTIONS"]
-    cached_methods         = ["GET", "HEAD", "OPTIONS"]
-    min_ttl                = 0
-    default_ttl            = "${var.cfd_ordered_regular_ttl}"
-    max_ttl                = "${var.cfd_ordered_max_ttl}"
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values = {
-      query_string = false
-      headers      = ["Host"]
-
-      cookies = {
-        forward = "none"
-      }
-    }
-  }
-
-  ordered_cache_behavior = {
-    path_pattern           = "/api/*"                                   // CACHE TO REJECT  - /api/*
-    target_origin_id       = "${aws_lb.alb.id}"
-    allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
-    cached_methods         = ["HEAD", "GET", "OPTIONS"]
-    min_ttl                = 0
-    default_ttl            = 0
-    max_ttl                = 0
-    viewer_protocol_policy = "redirect-to-https"
-
-    forwarded_values = {
-      query_string = true
-      headers      = ["Host"]
-
-      cookies = {
-        forward = "none"
-      }
-    }
   }
 }

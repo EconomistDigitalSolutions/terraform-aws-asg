@@ -266,14 +266,14 @@ variable "cfd_default_max_ttl" {
   default     = 86400
 }
 
-variable "cfd_ordered_regular_ttl" {
-  description = "The (regular) TTL of the ordered cache behaviour(es)"
-  type        = "string"
-  default     = 3600
+variable "hostnames_staging" {
+  description = "The hostnames for the staging environment"
+  type        = "list"
+  default     = []
 }
 
-variable "cfd_ordered_max_ttl" {
-  description = "The maximum TTL of the ordered cache behaviour(es)"
-  type        = "string"
-  default     = 86400
+variable "hostnames_prod" {
+  description = "The hostnames for the production environment"
+  type        = "list"
+  default     = []
 }
