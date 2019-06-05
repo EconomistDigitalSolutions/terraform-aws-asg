@@ -12,7 +12,7 @@ data "aws_acm_certificate" "example" {
 }
 
 // Route53 for Cloudfront
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "www-cdn" {
   count = "${var.domain-name != "" && var.use_cloudfront != "false" ? 1 : 0}"
 
   zone_id = "${data.aws_route53_zone.primary.zone_id}"
@@ -27,7 +27,7 @@ resource "aws_route53_record" "www" {
 }
 
 // Route53 for load balancer
-resource "aws_route53_record" "www" {
+resource "aws_route53_record" "www-lb" {
   count = "${var.domain-name != "" && var.use_cloudfront == "false" ? 1 : 0}"
 
   zone_id = "${data.aws_route53_zone.primary.zone_id}"
