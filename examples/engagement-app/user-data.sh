@@ -21,7 +21,7 @@ sudo aws ecr get-login --no-include-email --region eu-west-2 > login.sh
 sudo bash login.sh
 
 # pull docker app
-sudo docker pull 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:2e5afc38ba02a6560c386acd6a5d925f0b9f1588
+sudo docker pull 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:258eb5b4d8d6b76e1ba4fbc2991b37df1ae346ec
 
 # run docker app
-sudo docker run -d -p 80:80 --name engagement-app 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:2e5afc38ba02a6560c386acd6a5d925f0b9f1588
+sudo docker run -d -p 80:80 --name engagement-app 065882805973.dkr.ecr.eu-west-2.amazonaws.com/engagement-app:258eb5b4d8d6b76e1ba4fbc2991b37df1ae346ec

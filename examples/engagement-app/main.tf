@@ -1,7 +1,8 @@
 // You can call the module 'asg' whatever you want
 # // This block uses the module from two directories above
 module "asg-local" {
-  source = "../../"
+  source  = "EconomistDigitalSolutions/asg/aws"
+  version = "1.0.18"
 
   aws-profile          = "ds-web-products-staging"
   aws-region           = "eu-west-2"
