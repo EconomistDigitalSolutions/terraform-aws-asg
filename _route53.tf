@@ -15,7 +15,6 @@ data "aws_acm_certificate" "example" {
 resource "aws_route53_record" "www" {
   count = "${var.domain-name != "" ? 1 : 0}"
 
-  // not sure if this will work, as cdn is a conditional resource
   depends_on = ["aws_lb.alb", "aws_cloudfront_distribution.cdn"]  
 
   zone_id = "${data.aws_route53_zone.primary.zone_id}"
