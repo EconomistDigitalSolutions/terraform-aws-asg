@@ -1,8 +1,11 @@
 resource "aws_s3_bucket" "s3_bucket_logs" {
   count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
+  // If the bucket is marked for deletion, and is not empty, this forces it to be deleted
+  force_destroy = true
+
   bucket = "${var.s3_bucket_for_cloudfront_logs}"
-  acl    = "private"
+  acl    = "private"  
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
