@@ -56,7 +56,8 @@ resource "aws_cloudfront_distribution" "cdn" {
       headers      = ["Host"]
 
       cookies = {
-        forward = "none"
+        forward = "whitelist"
+        whitelisted_names = ["economist_amp_consent"] 
       }
     }
 
