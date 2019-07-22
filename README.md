@@ -8,6 +8,7 @@ This module provisions the resources necessary to run a (docker) application in 
   - [Table of contents](#table-of-contents)
   - [WWH - What, Why, How](#wwh---what-why-how)
   - [Usage](#usage)
+  - [Bugs/Known Issues](#bugsknown-issues)
   - [Implementation details](#implementation-details)
   - [Illustration](#illustration)
   - [Input/Output](#inputoutput)
@@ -15,8 +16,6 @@ This module provisions the resources necessary to run a (docker) application in 
     - [Outputs](#outputs)
   - [Considerations](#considerations)
   - [ToDo's](#todos)
-  - [Bugs/Known Issues](#bugsknown-issues)
-
 
 <hr/>
 
@@ -66,7 +65,28 @@ To use this module, it is advised to carefully follow these instructions:
     terraform init; terraform destroy --auto-approve
     ```
 
-<hr/>
+
+<hr />
+
+
+## Bugs/Known Issues
+
+* when changing region - can not migrate load-balancer
+  * this issue is currently open on:
+    * stackoverflow [https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform](https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform)
+    * Terraform [https://github.com/terraform-providers/terraform-provider-aws/issues/7517](https://github.com/terraform-providers/terraform-provider-aws/issues/7517)
+
+* Multiple concurrent deployments mya lead to issues with the terraform state lock, creating a race condition and possibly stale deployments;
+* Once Cloudfront is set up, tearing it down will cause downtime;
+  * This issue was [raised in StackExchange](https://devops.stackexchange.com/questions/8368/terraform-route53-lb-and-cdn-interdependencies), and there is thorough answer with very useful advice.
+* New deployments follow Blue/Green approach. A new Auto Scaling Group is created on every deployments. The teardown of the old ASG takes a long time (approx. 7 minutes).
+* In order to trigger a new deployment, the user-data script **must** change (even a newline is enough)
+* This module is a "all-in-one" solution for the Web Products infrastructure. Terraform advices against this, and recommends a modular approach (similar to what you would do with React on the FrontEnd).
+* The Amazon Machine Image (AMI) lookup is limited to Amazon Linux.
+
+
+<hr />
+
 
 ## Implementation details
 
@@ -186,7 +206,7 @@ Simplified illustration of the deployed stack:
 
 ## Considerations
 
-* Consider the addition of CloudFront Distribution (CFD) to serve as a Content Distribution Network (CDN).
+* ~~Consider the addition of CloudFront Distribution (CFD) to serve as a Content Distribution Network (CDN)~~.
 
 * Consider the usage of Spot Instances to reduce costs.
   
@@ -208,12 +228,3 @@ Simplified illustration of the deployed stack:
 ## ToDo's
 
 * add outputs
-
-<hr/>
-
-## Bugs/Known Issues
-
-* when changing region - can not migrate load-balancer
-  * this issue is currently open on:
-    * stackoverflow [https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform](https://stackoverflow.com/questions/54650350/aws-load-balancer-change-region-with-terraform)
-    * Terraform [https://github.com/terraform-providers/terraform-provider-aws/issues/7517](https://github.com/terraform-providers/terraform-provider-aws/issues/7517)
