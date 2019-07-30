@@ -57,7 +57,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
       cookies = {
         forward = "whitelist"
-        whitelisted_names = ["economist_amp_consent"] 
+        whitelisted_names = ["economist_amp_consent", "economist_piano_id"] 
       }
     }
 
