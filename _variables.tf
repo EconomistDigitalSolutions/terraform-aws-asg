@@ -277,3 +277,10 @@ variable "hostnames_prod" {
   type        = "list"
   default     = []
 }
+
+variable "root-domain" {
+  description = "The hostnames for the production environment"
+  type        = "string"
+  default     = ""
+}
+

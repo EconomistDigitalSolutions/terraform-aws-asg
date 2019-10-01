@@ -1,15 +1,29 @@
-data "aws_route53_zone" "primary" {
-  count = "${var.domain-name != "" ? 1 : 0}"
+# data "aws_route53_zone" "primary" {
+#   count = "${var.domain-name != "" ? 1 : 0}"
 
-  name = "${var.domain-name}"
+#   name = "${var.domain-name}"
+# }
+
+# data "aws_acm_certificate" "example" {
+#   count = "${var.use_cloudfront != "false" ? 1 : 0}"
+
+#   provider = "aws.useast1"                                // SSL certificate must be in US-east-1 to use with Cloudfront
+#   domain   = "${var.domain-name}"
+# }
+
+data "aws_route53_zone" "primary" {
+  count = "${var.root-domain != "" ? 1 : 0}"
+
+  name = "${var.root-domain}"
 }
 
 data "aws_acm_certificate" "example" {
   count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
   provider = "aws.useast1"                                // SSL certificate must be in US-east-1 to use with Cloudfront
-  domain   = "${var.domain-name}"
+  domain   = "${var.root-domain}"
 }
+
 
 // Route53 for Cloudfront
 resource "aws_route53_record" "www" {
