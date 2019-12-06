@@ -5,7 +5,7 @@ resource "aws_s3_bucket" "s3_bucket_logs" {
   force_destroy = true
 
   bucket = "${var.s3_bucket_for_cloudfront_logs}"
-  acl    = "private"  
+  acl    = "private"
 }
 
 resource "aws_cloudfront_distribution" "cdn" {
@@ -53,15 +53,16 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     forwarded_values = {
       query_string = true
+      query_string_cache_keys = ["ecdesign"]
       headers      = ["Host"]
 
       cookies = {
         forward = "whitelist"
         whitelisted_names = [
-          "economist_amp_consent", 
+          "economist_amp_consent",
           "economist_piano_id",
           "economist_has_visited_app_before"
-        ] 
+        ]
       }
     }
 
