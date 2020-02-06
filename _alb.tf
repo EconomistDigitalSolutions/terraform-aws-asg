@@ -12,10 +12,11 @@ resource "aws_lb" "alb" {
 }
 
 resource "aws_lb_target_group" "lb_target" {
-  name_prefix = "${var.target-group-name}"
-  port        = 80
-  protocol    = "HTTP"
-  vpc_id      = "${aws_vpc.vpc.id}"
+  name_prefix          = "${var.target-group-name}"
+  port                 = 80
+  protocol             = "HTTP"
+  vpc_id               = "${aws_vpc.vpc.id}"
+  deregistration_delay = "${var.target-group-deregistration-delay}"
 
   health_check = {
     interval            = "${var.health_check_interval}"

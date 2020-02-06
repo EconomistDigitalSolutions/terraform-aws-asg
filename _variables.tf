@@ -122,6 +122,12 @@ variable "target-group-name" {
   default     = "lb-tg"
 }
 
+variable "target-group-deregistration-delay" {
+  description = "The amount of time to wait before changing the state of a deregistering target from draining to unused"
+  type        = "string"
+  default     = 500
+}
+
 variable "launch-config-name" {
   description = "The name of the launch configuration"
   type        = "string"
