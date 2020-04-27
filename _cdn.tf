@@ -53,7 +53,7 @@ resource "aws_cloudfront_distribution" "cdn" {
 
     forwarded_values = {
       query_string = true
-      headers      = ["Host", "X-Economist-Host"]
+      headers      = ["Host", "X-Economist-Host", "incap-geo"]
 
       cookies = {
         forward = "whitelist"
