@@ -24,7 +24,6 @@ data "aws_acm_certificate" "example" {
   domain   = "${var.root-domain}"
 }
 
-
 // Route53 for Cloudfront
 resource "aws_route53_record" "www" {
   count = "${var.domain-name != "" ? 1 : 0}"
@@ -49,6 +48,8 @@ resource "aws_route53_record" "internal-dns" {
   zone_id = "${data.aws_route53_zone.primary.zone_id}"
   name    = "${var.internal-domain-name}"
   type    = "A"
+
+  depends_on = ["aws_lb.alb"]
 
   weighted_routing_policy {
     weight = 100
