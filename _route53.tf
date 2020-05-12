@@ -51,7 +51,7 @@ resource "aws_route53_record" "internal-dns" {
 
   depends_on = ["aws_lb.alb"]
 
-  weighted_routing_policy {
+  weighted_routing_policy = {
     weight = 100
   }
 
