@@ -11,12 +11,14 @@ resource "aws_s3_bucket" "s3_bucket_logs" {
 resource "aws_cloudfront_distribution" "cdn" {
   count = "${var.use_cloudfront != "false" ? 1 : 0}"
 
+  depends_on = ["aws_route53_record.internal-dns"]
+
   aliases = ["${var.domain-name}", "${local.cdn_hostnames_aliases}"]
   enabled = true
 
   origin = {
-    domain_name = "${aws_lb.alb.dns_name}"
-    origin_id   = "${aws_lb.alb.id}"
+    domain_name = "${aws_route53_record.internal-dns.name}"
+    origin_id   = "internal-dns"
 
     custom_origin_config = {
       http_port              = 80
