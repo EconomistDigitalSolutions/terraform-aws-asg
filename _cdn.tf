@@ -51,7 +51,7 @@ resource "aws_cloudfront_distribution" "cdn" {
   default_cache_behavior = {
     allowed_methods        = ["DELETE", "GET", "HEAD", "OPTIONS", "PATCH", "POST", "PUT"]
     cached_methods         = ["HEAD", "GET", "OPTIONS"]
-    target_origin_id = "${aws_lb.alb.id}"
+    target_origin_id = "internal-dns"
 
     forwarded_values = {
       query_string = true
