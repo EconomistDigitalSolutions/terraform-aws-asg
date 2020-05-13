@@ -167,7 +167,6 @@ variable "sub-domain-name" {
 variable "internal-domain-name" {
   description = "Internal DNS name which refers to the ALB"
   type        = "string"
-  default     = ""
 }
 
 variable "ssh-allowed-ips" {
