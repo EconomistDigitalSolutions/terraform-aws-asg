@@ -171,7 +171,7 @@ variable "internal-domain-name" {
 
 variable "internal-domain-weight" {
   description = "Internal DNS weight which refers to the ALB"
-  type        = "number"
+  type        = "string"
   default     = 100
 }
 
