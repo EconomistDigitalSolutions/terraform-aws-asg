@@ -53,7 +53,7 @@ resource "aws_route53_record" "internal-dns" {
   depends_on = ["aws_lb.alb"]
 
   weighted_routing_policy = {
-    weight = 100
+    weight = ${var.internal-domain-weight}
   }
 
   set_identifier = "old_env"

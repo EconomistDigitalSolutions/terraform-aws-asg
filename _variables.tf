@@ -169,6 +169,12 @@ variable "internal-domain-name" {
   type        = "string"
 }
 
+variable "internal-domain-weight" {
+  description = "Internal DNS weight which refers to the ALB"
+  type        = "number"
+  default     = 100
+}
+
 variable "ssh-allowed-ips" {
   description = "The list of IPs that are allowed to SSH into the instances"
   type        = "list"
