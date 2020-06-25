@@ -64,6 +64,7 @@ resource "aws_cloudfront_distribution" "cdn" {
           "economist_piano_id",
           "economist_has_visited_app_before",
           "ec_community",
+          "login_callback",
           "geo_region"
         ]
       }
